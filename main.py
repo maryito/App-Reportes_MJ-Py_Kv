@@ -18,14 +18,17 @@ class User(ScreenManager):
 		self.hora= self.calendario[1]
 
 	def usuario(self):
-		name = (self.nombre.text)
-		print(type(name))
-		if name != "":
-			self.status =""
-			print("Usuario: "+name, "Ventana: "+self.status)
+		name = (self.nombre.text).strip()
+		empresa = (self.empresa.text).strip()
+
+		if name != "" and name != "":
+			print("Bien")
+			# self.status =""
+			# print("Usuario: "+name, "Ventana: "+self.status)
 		else:
-			self.status = "usu"
-			print("Usuario: "+name, "Ventana: "+self.status)
+			print("Falta")
+			# self.status = "usu"
+			# print("Usuario: "+name, "Ventana: "+self.status)
 
 		
 class ReportesApp(App):
