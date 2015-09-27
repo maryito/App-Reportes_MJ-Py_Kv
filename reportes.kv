@@ -1,0 +1,64 @@
+<User>:
+	fecha: ""
+	hora: ""
+	estado:"usu"
+	nombre:nombre
+	empresa:empresa
+	Screen:
+		name: ""
+		Button:
+			text: 'BIENVENIDO AL SISTEMA'
+			on_press: 
+                root.current=('usu')
+                root.horario() 
+    Screen:    	
+		name: "usu"
+  #       canvas.before:        
+  #           Rectangle:
+  #               pos: self.pos
+  #               size: self.size
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: "10dp"
+			font_size: "30dp"
+	        Label:	        		 
+				text: ("NUEVO PROYECTO")
+			Label:	        		 
+				text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
+			
+			GridLayout:
+				cols: 2
+				rows: 2			
+		        Label: 
+		        	text: "Nombre: "
+		        TextInput:
+		        	id: nombre
+		        	multiline: False
+		        Label: 
+		        	text: "Tienda: "
+		        TextInput:
+		        	id: empresa
+		        	multiline: False	
+		    	    	
+		    Button:  	
+		    	
+				text: ''+root.estado
+				on_press: 		           
+	                root.usuario() 
+	        		root.current=('categoria')
+    Screen:    	
+		name: "categoria"
+		GridLayout:
+			spacing: "10dp"
+			
+			cols: 1
+			Button:
+				font_size: "30dp"
+				text: 'DA'
+			Button:
+				font_size: "30dp"
+				text: 'AV'
+			Button:  		    	
+				text: 'MENU PRINCIPAL'
+				on_press: 		  
+	        		root.current=('')
