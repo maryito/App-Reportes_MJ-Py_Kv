@@ -21,10 +21,14 @@ class User(ScreenManager):
 		name = (self.nombre.text).strip()
 		empresa = (self.empresa.text).strip()
 
-		if name != "" and name != "":
+		if (name != "" and empresa != ""):
 			print("Bien")
 			# self.status =""
 			# print("Usuario: "+name, "Ventana: "+self.status)
+		elif name == "" and empresa != "":
+			print("Falta Nombre")
+		elif empresa == "" and name != "":
+			print("Falta Empresa")
 		else:
 			print("Falta")
 			# self.status = "usu"
