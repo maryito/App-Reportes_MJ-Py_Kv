@@ -17,7 +17,7 @@
 <User>:
 	fecha: ""
 	hora: ""
-	estado:"usu"
+	estado:""
 	var_consul: "-----"
 	nombre:nombre
 	empresa:empresa
@@ -28,14 +28,14 @@
 	med: med 
 	marca: marca 
 	sku: sku
-	search_results_list:search_results_list
+	resultado_lista:lista
 	Screen:
 		name: ""
 		Button:
 			text: 'BIENVENIDO AL SISTEMA'
 			on_press: 
-                root.current=('usu')
-                root.horario() 
+				root.iniciar()
+                root.current=('usu')                 
                 root.transition = FadeTransition()
     Screen:    	
 		name: "usu"
@@ -44,8 +44,8 @@
             spacing: "10dp"
 			font_size: "30dp"
 			Button:
-				text: 'PROYECTO'
-				on_press: root.current=('save')
+				text: 'Continuar Proyecto'
+				on_press: root.current=('guardar')
 	        Titulo:
             	text:('[b]NUEVO PROYECTO[/b]')
 			Label:	        		 
@@ -66,7 +66,7 @@
 		    	    	
 		    Button:  	
 		    	
-				text: 'inicio'+root.estado
+				text: 'Inicio'+root.estado
 				on_press: 		           
 	                root.usuario() 
 	                root.current=('categoria')
@@ -95,8 +95,8 @@
 					spacing: "50dp"			    	
 					text: 'SAVE PROYECT'
 					on_press: 
-						root.usuario()
-						root.current=('save')
+						root.save_db()
+						root.current=('guardar')
 		        Button:  		    	
 					text: '*NEXT'#ESTARIA DE MAS 
 					# on_press: root.current=('')
@@ -221,15 +221,19 @@
 				Button:  		    	
 					text: 'ATRAS' #funcione para que regrese a submenu
 					on_press:  
-						root.current=(''+root.name)
+						root.current=(''+root.name)						
+						root.limpiar()
 				Button:  		    	
 					text: 'NEW SKU'
 					on_press:  
 						root.current=('nuevo_art')
 		        Button:  		    	
 					text: 'SAVE'
-					# on_press: root.current=('') 
-	Screen:    	
+					on_press:  
+						root.current=(''+root.name)
+						root.save()						
+						root.limpiar()
+	Screen:    			
 		name: "nuevo_art"
 		BoxLayout:
         	orientation: 'vertical'
@@ -273,52 +277,40 @@
 				spacing: "50dp"
 				Button:  		    	
 					text: 'ATRAS' 
-					on_press:  root.current=(''+root.name)
+					on_press:  
+						root.current=(''+root.name)
 				Button:  		    	
 					text: 'SAVE NEW SKU'
 					on_press:  
 						root.save_new_sku()
-						root.current=(''+root.name)
+						root.current=("consultando")
 	Screen:
 		
-		name: 'save'
-		
-		size_hint: None,None
-	    size: 400,400
-	    ListView:
-	    	id: search_results_list
-	        size_hint: .8,.8
-
+		name: 'guardar'
+		canvas.before:
+	        Color:
+	            rgba: (0.2, 0.2, 0.2, 1)
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size
 	    BoxLayout:
-		    id: bl
-		    orientation: "vertical"
-		    popup: popup.__self__
-		    canvas:
-		        Color:
-		            rgba: .18, .18, .18, .91
-		        Rectangle:
-		            size: self.size
-		            pos: self.pos
-		    Bubble:
-		        size_hint: (None, None)
-		        size: (150, 50)
-		        pos_hint: {'center_x': .5, 'y': .6}
-		        arrow_pos: 'bottom_mid'
-		        orientation: 'horizontal'
-		        BubbleButton:
-		            text: 'This is'
-		        BubbleButton:
-		            text: 'a'
-		        BubbleButton:
-		            text: 'Bubble'
-		    Button:
-		        text: 'press to show popup'
-		        on_release: root.popup.open()
-		    Popup:
-		        id: popup
-		        title: "An example popup"
-		        content: popupcontent
-		        Button:
-		            id: popupcontent
-		            text: "press to dismiss"
-		            on_release: popup.dismiss()
+	    	#aqui ira un for de botones 
+	    	orientation: 'vertical'
+		    GridLayout:
+		    	cols: 2
+			    ListView:
+			    	id: lista
+			        size_hint: .8,.8
+		    GridLayout:
+				cols: 2
+				spacing: "50dp"
+			    Button:  		    	
+					text: 'Continuar \n Proyecto' 
+					#on_press:  root.current=('')
+				Button:  		    	
+					text: 'SEND PROYECTO'
+					on_press:  
+						root.current=('usu')
+			Button:  		    	
+				text: 'ATRAS' 
+				on_press:  root.current=('categoria')
