@@ -17,14 +17,11 @@
 <User>:
 	fecha: ""
 	hora: ""
-<<<<<<< HEAD
-	estado:"Usu"
-=======
 	estado:""
 	var_consul: "-----"
->>>>>>> origin/master
 	nombre:nombre
 	empresa:empresa
+	veri:veri
 	# variables para agregar en el modulo NEW SKU
 	div: div
 	cat: cat 
@@ -46,17 +43,6 @@
     Screen:    	
 		name: "usu"
         BoxLayout:
-<<<<<<< HEAD
-        	orientation: 'vertical'
-        	Label:
-	        	text: 'Nuevo Proyecto'
-	        	font_size: 72
-        	Label:
-        		text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
-        		font_size: 30
-	        GridLayout:
-	        	cols: 2		
-=======
             orientation: 'vertical'
             spacing: "10dp"
 			font_size: "30dp"
@@ -69,8 +55,7 @@
 				text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
 			GridLayout:
 				cols: 2
-				rows: 2			
->>>>>>> origin/master
+				rows: 2
 		        Label: 
 		        	text: "Nombre: "
 		        TextInput:
@@ -81,27 +66,23 @@
 		        TextInput:
 		        	id: empresa
 		        	multiline: False	
-<<<<<<< HEAD
-		    GridLayout:
-		    	cols: 1
-				BoxLayout:
-					Button:
-						background_color: (0,2, 4, 6)  	
-				    	text: 'Inicio '+root.estado
-						on_press: 		           
-			                root.usuario() 
-			        		root.current=('categoria')
-=======
-		    	    	
 		    Button:  	
 		    	
-				text: 'Inicio'+root.estado
+				text: 'Inicio'
 				on_press: 		           
 	                root.usuario() 
-	                root.current=('categoria')
+	                root.current=('verificacion')
 	                root.transition = FallOutTransition()
-
->>>>>>> origin/master
+	Screen:
+		name: 'verificacion'
+		GridLayout:
+			cols: 2
+			TextInput:
+				id: veri
+			Button:
+				id: veri_ventana
+				#text: 'Atras'
+				on_press: root.current = (''+root.veri_ventana.text)
     Screen:    	
 		name: "categoria"
 		GridLayout:

@@ -20,7 +20,8 @@ class User(ScreenManager):
 	nombre = ObjectProperty()
 	empresa = ObjectProperty()
 	calendario = fechas()
-
+	veri = ObjectProperty()
+	veri_ventana = ObjectProperty()
 	#necesitamos POpup para confirmacion y validacion de datos	
 	
 	div=	ObjectProperty()
@@ -36,6 +37,7 @@ class User(ScreenManager):
 	temp =[]
 	sav = False 
 	fin = True
+	veri_ventana =""
 	def iniciar(self):
 		self.fecha= self.calendario[0]
 		self.hora= self.calendario[1]	
@@ -54,10 +56,11 @@ class User(ScreenManager):
 		empresa = (self.empresa.text).strip()
 		estado = (self.empresa.text).strip()
 		#usu = name+empresa+fecha+hora
-		if (name != "" and empresa != ""): estado="usuario--Bien"; print(estado)
-		elif name == "" and empresa != "": estado="usuario--Falta Nombre";print("Falta Nombre")
-		elif empresa == "" and name != "": estado="usuario--Falta Empresa";print("Falta Empresa")
-		else: print("usuario-- Falta usuario")
+
+		if (name != "" and empresa != ""): self.veri.text="usuario--Bien"; self.veri_ventana.text="categoria";print(estado)
+		elif name == "" and empresa != "": self.veri.text=estado="usuario--Falta Nombre"; print(estado)
+		elif empresa == "" and name != "": self.veri.text=estado="usuario--Falta Empresa"; print(estado)
+		else:  self.veri_ventana.text="";estado="usuario-- Falta usuario"; print(estado)
 	
 	def save_new_sku(self): #funcion nos servira para guardar la data ingresada
 		#asignamos los valores temporablemente a una lista
