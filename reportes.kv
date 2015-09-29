@@ -1,9 +1,38 @@
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+#:import label kivy.uix.label
+#:import sla kivy.adapters.simplelistadapter
+<Titulo@Label>
+    markup: True
+    font_size: 50       
+    size_hint:(None, None)
+    size:(100, 44)
+    pos_hint:{'center_x': .5 , 'center_y': .90}
 <User>:
 	fecha: ""
 	hora: ""
+<<<<<<< HEAD
 	estado:"Usu"
+=======
+	estado:""
+	var_consul: "-----"
+>>>>>>> origin/master
 	nombre:nombre
 	empresa:empresa
+	# variables para agregar en el modulo NEW SKU
+	div: div
+	cat: cat 
+	subcat: subcat
+	med: med 
+	marca: marca 
+	sku: sku
+	resultado_lista:lista
 	Screen:
 		name: ""
 		Button:
@@ -11,11 +40,13 @@
 			font_size: 35
 			background_color: (0, 2, 4, 6)
 			on_press: 
-                root.current=('usu')
-                root.horario() 
+				root.iniciar()
+                root.current=('usu')                 
+                root.transition = FadeTransition()
     Screen:    	
 		name: "usu"
         BoxLayout:
+<<<<<<< HEAD
         	orientation: 'vertical'
         	Label:
 	        	text: 'Nuevo Proyecto'
@@ -25,6 +56,21 @@
         		font_size: 30
 	        GridLayout:
 	        	cols: 2		
+=======
+            orientation: 'vertical'
+            spacing: "10dp"
+			font_size: "30dp"
+			Button:
+				text: 'Continuar Proyecto'
+				on_press: root.current=('guardar')
+	        Titulo:
+            	text:('[b]NUEVO PROYECTO[/b]')
+			Label:	        		 
+				text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
+			GridLayout:
+				cols: 2
+				rows: 2			
+>>>>>>> origin/master
 		        Label: 
 		        	text: "Nombre: "
 		        TextInput:
@@ -35,6 +81,7 @@
 		        TextInput:
 		        	id: empresa
 		        	multiline: False	
+<<<<<<< HEAD
 		    GridLayout:
 		    	cols: 1
 				BoxLayout:
@@ -44,19 +91,256 @@
 						on_press: 		           
 			                root.usuario() 
 			        		root.current=('categoria')
+=======
+		    	    	
+		    Button:  	
+		    	
+				text: 'Inicio'+root.estado
+				on_press: 		           
+	                root.usuario() 
+	                root.current=('categoria')
+	                root.transition = FallOutTransition()
+
+>>>>>>> origin/master
     Screen:    	
 		name: "categoria"
 		GridLayout:
-			spacing: "10dp"
-			
+			spacing: "70dp"
+			font_size: "30dp"
 			cols: 1
-			Button:
-				font_size: "30dp"
+			Button:				
 				text: 'DA'
+				on_press: 
+					root.current=('da')
+					root.transition = RiseInTransition() 
 			Button:
-				font_size: "30dp"
 				text: 'AV'
+				on_press: 
+					root.current=('av')
+					root.transition = WipeTransition()
+			GridLayout:
+				cols: 2
+				spacing: "50dp"
+				Button:  	
+					spacing: "50dp"			    	
+					text: 'SAVE PROYECT'
+					on_press: 
+						root.save_db()
+						root.current=('guardar')
+		        Button:  		    	
+					text: '*NEXT'#ESTARIA DE MAS 
+					# on_press: root.current=('')
+	Screen:    	
+		name: "da"		
+        BoxLayout:
+        	orientation: 'vertical'
+            spacing: "20dp"
+			font_size: "30dp"
+        	Titulo:
+            	text:('[b]DA[/b]')			
+			Button:				
+				text: 'AC'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("AC","da")
+			Button:
+				text: 'WM'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("WM","da")
+			Button:				
+				text: 'MWO'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("MWO","da")
+			Button:
+				text: 'AV'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("AV","da")
+			Button:
+				text: 'REF'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("REF","da")
+			Button:
+				text: 'OVEN'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("AC","da")			
+			GridLayout:
+				cols: 2
+				spacing: "50dp"
+				Button:  		    	
+					text: 'ATRAS'
+					on_press:  root.current=('categoria')
+		        Button:  		    	
+					text: '*NEXT'#ESTARIA DE MAS 
+					# on_press: root.current=('')
+	Screen:    	
+		name: "av"
+		BoxLayout:
+        	orientation: 'vertical'
+            spacing: "20dp"
+			font_size: "30dp"
+        	Titulo:
+            	text:('[b]AV[/b]')			
+			Button:				
+				text: 'TV'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("TV","av")
+			Button:
+				text: 'MINI'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("MINI","av")
+			Button:				
+				text: 'MICRO'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("MICRO","av")
+			Button:
+				text: 'DVD'	
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("DVD","av")
+			Button:
+				text: 'HTS'
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("HTS","av")
+			Button:
+				text: 'BD'	
+				on_press: 
+					root.current=('consultando')	
+					root.categoria("BD","av")		
+			GridLayout:
+				cols: 2
+				spacing: "50dp"
+				Button:  		    	
+					text: 'ATRAS'
+					on_press:  root.current=('categoria')
+		        Button:  		    	
+					text: '*NEXT'#ESTARIA DE MAS 
+					# on_press: root.current=('')
+	Screen:    	
+		name: "consultando"
+		BoxLayout:
+        	orientation: 'vertical'
+            spacing: "20dp"
+			font_size: "30dp"
+        	Titulo:
+            	text:('[b]consulta: {0}[/b]'.format(root.var_consul))			
+			GridLayout:
+				cols: 4
+				spacing: "20dp"
+				Button:  		    	
+					text: '1'
+				Button:  		    	
+					text: '2'
+		        Button:  		    	
+					text: '3'	
+				Button:  		    	
+					text: '4'
+			Label:
+				text: 'consultando'			
+			GridLayout:
+				cols: 3
+				spacing: "40dp"
+				Button:  		    	
+					text: 'ATRAS' #funcione para que regrese a submenu
+					on_press:  
+						root.current=(''+root.name)						
+						root.limpiar()
+				Button:  		    	
+					text: 'NEW SKU'
+					on_press:  
+						root.current=('nuevo_art')
+		        Button:  		    	
+					text: 'SAVE'
+					on_press:  
+						root.current=(''+root.name)
+						root.save()						
+						root.limpiar()
+	Screen:    			
+		name: "nuevo_art"
+		BoxLayout:
+        	orientation: 'vertical'
+            spacing: "10dp"
+			font_size: "30dp"
+        	Titulo:
+            	text:('[b]NEW SKU[/b]')				
+			Label: 
+	        	text: "DIVISIÓN"
+	        TextInput:
+	        	id: div
+	        	multiline: False
+	        Label: 
+	        	text: "CATEGORIA"
+	        TextInput:
+	        	id: cat
+	        	multiline: False
+	        Label: 
+	        	text: "SUBCATEGORIA"
+	        TextInput:
+	        	id: subcat
+	        	multiline: False
+	        Label: 
+	        	text: "MEDIDA "
+	        TextInput:
+	        	id: med
+	        	multiline: False
+	        Label: 
+	        	text: "MARCA"
+	        TextInput:
+	        	id: marca
+	        	multiline: False
+	        Label: 
+	        	text: "SKU"
+	        TextInput:
+	        	id: sku
+	        	multiline: False
+		        		
+			GridLayout:
+				cols: 2
+				spacing: "50dp"
+				Button:  		    	
+					text: 'ATRAS' 
+					on_press:  
+						root.current=(''+root.name)
+				Button:  		    	
+					text: 'SAVE NEW SKU'
+					on_press:  
+						root.save_new_sku()
+						root.current=("consultando")
+	Screen:
+		
+		name: 'guardar'
+		canvas.before:
+	        Color:
+	            rgba: (0.2, 0.2, 0.2, 1)
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size
+	    BoxLayout:
+	    	#aqui ira un for de botones 
+	    	orientation: 'vertical'
+		    GridLayout:
+		    	cols: 2
+			    ListView:
+			    	id: lista
+			        size_hint: .8,.8
+		    GridLayout:
+				cols: 2
+				spacing: "50dp"
+			    Button:  		    	
+					text: 'Continuar \n Proyecto' 
+					#on_press:  root.current=('')
+				Button:  		    	
+					text: 'SEND PROYECTO'
+					on_press:  
+						root.current=('usu')
 			Button:  		    	
-				text: 'MENU PRINCIPAL'
-				on_press: 		  
-	        		root.current=('')
+				text: 'ATRAS' 
+				on_press:  root.current=('categoria')
