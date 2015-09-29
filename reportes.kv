@@ -1,34 +1,30 @@
 <User>:
 	fecha: ""
 	hora: ""
-	estado:"usu"
+	estado:"Usu"
 	nombre:nombre
 	empresa:empresa
 	Screen:
 		name: ""
 		Button:
 			text: 'BIENVENIDO AL SISTEMA'
+			font_size: 35
+			background_color: (0, 2, 4, 6)
 			on_press: 
                 root.current=('usu')
                 root.horario() 
     Screen:    	
 		name: "usu"
-  #       canvas.before:        
-  #           Rectangle:
-  #               pos: self.pos
-  #               size: self.size
         BoxLayout:
-            orientation: 'vertical'
-            spacing: "10dp"
-			font_size: "30dp"
-	        Label:	        		 
-				text: ("NUEVO PROYECTO")
-			Label:	        		 
-				text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
-			
-			GridLayout:
-				cols: 2
-				rows: 2			
+        	orientation: 'vertical'
+        	Label:
+	        	text: 'Nuevo Proyecto'
+	        	font_size: 72
+        	Label:
+        		text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
+        		font_size: 30
+	        GridLayout:
+	        	cols: 2		
 		        Label: 
 		        	text: "Nombre: "
 		        TextInput:
@@ -39,13 +35,15 @@
 		        TextInput:
 		        	id: empresa
 		        	multiline: False	
-		    	    	
-		    Button:  	
-		    	
-				text: ''+root.estado
-				on_press: 		           
-	                root.usuario() 
-	        		root.current=('categoria')
+		    GridLayout:
+		    	cols: 1
+				BoxLayout:
+					Button:
+						background_color: (0,2, 4, 6)  	
+				    	text: 'Inicio '+root.estado
+						on_press: 		           
+			                root.usuario() 
+			        		root.current=('categoria')
     Screen:    	
 		name: "categoria"
 		GridLayout:
