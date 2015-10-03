@@ -54,8 +54,8 @@ class User(ScreenManager):
 	add ={}
 	temp =[]
 	sav = False 
-
 	_popup = None
+
 	def _dismiss_popup(self):
 		self._popup.dismiss()
 	def do_popup(self):
@@ -65,7 +65,6 @@ class User(ScreenManager):
 		popup_content =  ListView(item_strings=["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()])
 		self._popup = Popup(title = 'Bievenidos', size_hint = (0.5, 0.5), content=popup_content)
 		self._popup.open()
-
 	def iniciar(self):
 		self.fecha= self.calendario[0]
 		self.hora= self.calendario[1]	
@@ -82,14 +81,13 @@ class User(ScreenManager):
 	def usuario(self):
 		name = (self.nombre.text)
 		empresa = (self.empresa.text)
-		#usu = name+empresa+fecha+hora
 		self.estado_ven.text="Menu Principal"
 		if (name != "" and empresa != ""): self.estado.text="\t\tDatos Corrector ! \n\n\t\t\t\tBienvenido Nuevamente :)"; self.estado_ven.text ="Categoria"
 		elif name == "" and empresa != "": self.estado.text="\t\tDatos Incorrecto!!!\n\n\t\t\t\t Falta Nombre"
 		elif empresa == "" and name != "": self.estado.text="\t\tDatos Incorrecto!!!\n\n\t\t\t\tFalta Empresa"
 		else: self.estado.text="\t\tDatos Incorrecto!!!\n\n\t\t\t\tFalta Ingresar: \n\n\t\t\t\t\t El Usuario y La Empresa"
 		print("Usuario ----> "+self.estado.text, "ventana ----> "+self.estado_ven.text)
-	
+
 	def save_new_sku(self): #funcion nos servira para guardar la data ingresada
 		#asignamos los valores temporablemente a una lista
 		

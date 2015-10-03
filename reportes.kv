@@ -29,6 +29,7 @@
 	empresa:empresa
 	estado: estado
 	estado_ven:estado_ven
+
 	# variables para agregar en el modulo NEW SKU
 	div: div
 	cat: cat 
@@ -44,6 +45,8 @@
 		    on_release: app.do_popup()
 		Button:
 			text: 'BIENVENIDO AL SISTEMA'
+			font_size: 35
+			background_color: (0, 2, 4, 6)
 			on_press: 
 				# root.do_popup()
 				root.iniciar()
@@ -64,7 +67,7 @@
 				text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
 			GridLayout:
 				cols: 2
-				rows: 2			
+				rows: 2
 		        Label: 
 		        	text: "Nombre: "
 		        TextInput:
@@ -97,7 +100,7 @@
 	        	size_hint_x: 0.75
 		    	pos_hint: {'center_x': 0.5}	
 	        	id:estado_ven		    
-				on_press: root.current=(''+estado_ven.text)          
+				on_press: root.current=(''+estado_ven.text)
     Screen:    	
 		name: "Categoria"
 		BoxLayout:
