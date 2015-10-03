@@ -14,6 +14,12 @@
     size_hint:(None, None)
     size:(100, 44)
     pos_hint:{'center_x': .5 , 'center_y': .90}
+
+<MaButton@Button>:
+    text: '123'
+<MaPopup@Popup>:
+    auto_dismiss: True
+
 <User>:
 	fecha: ""
 	hora: ""
@@ -21,6 +27,8 @@
 	var_consul: "-----"
 	nombre:nombre
 	empresa:empresa
+	estado: estado
+	estado_ven:estado_ven
 	# variables para agregar en el modulo NEW SKU
 	div: div
 	cat: cat 
@@ -30,15 +38,19 @@
 	sku: sku
 	resultado_lista:lista
 	Screen:
-		name: ""
+		name: "Inicio"
+		MaButton:
+		    id: main_button
+		    on_release: app.do_popup()
 		Button:
 			text: 'BIENVENIDO AL SISTEMA'
 			on_press: 
+				# root.do_popup()
 				root.iniciar()
-                root.current=('usu')                 
+                root.current=('Menu Principal')                 
                 root.transition = FadeTransition()
     Screen:    	
-		name: "usu"
+		name: "Menu Principal"
         BoxLayout:
             orientation: 'vertical'
             spacing: "10dp"
@@ -62,44 +74,63 @@
 		        	text: "Tienda: "
 		        TextInput:
 		        	id: empresa
-		        	multiline: False	
-		    	    	
-		    Button:  	
-		    	
-				text: 'Inicio'+root.estado
+		        	multiline: False		    	    	
+		    Button:  
+		    	size_hint_x: 0.5
+		    	pos_hint: {'center_x': 0.5}	    	
+				text: 'Inicio'
 				on_press: 		           
 	                root.usuario() 
-	                root.current=('categoria')
+	                root.current=('veri_usu')
 	                root.transition = FallOutTransition()
-
+	Screen:
+		name: "veri_usu"
+		BoxLayout:
+			orientation: 'vertical'
+			spacing: "50dp"
+			TextInput:
+				padding: [25, 25]
+				id: estado
+				disabled: True   	
+				spacing: "50dp"		
+	        Button:  
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
+	        	id:estado_ven		    
+				on_press: root.current=(''+estado_ven.text)          
     Screen:    	
-		name: "categoria"
-		GridLayout:
+		name: "Categoria"
+		BoxLayout:
+			orientation: 'vertical'
 			spacing: "70dp"
 			font_size: "30dp"
-			cols: 1
-			Button:				
+			Button:
+				spacing: "50dp"	
+				size_hint_x: 0.60
+	    		pos_hint: {'center_x': 0.5}	 				
 				text: 'DA'
 				on_press: 
 					root.current=('da')
 					root.transition = RiseInTransition() 
 			Button:
+				size_hint_x: 0.60
+	    		pos_hint: {'center_x': 0.5}	 
 				text: 'AV'
 				on_press: 
 					root.current=('av')
 					root.transition = WipeTransition()
-			GridLayout:
-				cols: 2
-				spacing: "50dp"
-				Button:  	
-					spacing: "50dp"			    	
-					text: 'SAVE PROYECT'
-					on_press: 
-						root.save_db()
-						root.current=('guardar')
-		        Button:  		    	
-					text: '*NEXT'#ESTARIA DE MAS 
-					# on_press: root.current=('')
+			
+			Button: 
+				size_hint_x: 0.75
+	    		pos_hint: {'center_x': 0.5}	 	
+				spacing: "50dp"			    	
+				text: 'SAVE PROYECT'
+				on_press: 
+					root.save_db()
+					root.current=('guardar')
+		   #      Button:  		    	
+					# text: '*NEXT'#ESTARIA DE MAS 
+					# # on_press: root.current=('')
 	Screen:    	
 		name: "da"		
         BoxLayout:
@@ -108,45 +139,58 @@
 			font_size: "30dp"
         	Titulo:
             	text:('[b]DA[/b]')			
-			Button:				
+			Button:	
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85			
 				text: 'AC'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("AC","da")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'WM'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("WM","da")
-			Button:				
+			Button:		
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85		
 				text: 'MWO'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("MWO","da")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'AV'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("AV","da")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'REF'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("REF","da")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'OVEN'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("AC","da")			
-			GridLayout:
-				cols: 2
+							
+			Button: 
 				spacing: "50dp"
-				Button:  		    	
-					text: 'ATRAS'
-					on_press:  root.current=('categoria')
-		        Button:  		    	
-					text: '*NEXT'#ESTARIA DE MAS 
-					# on_press: root.current=('')
+				size_hint_x: 0.5
+	    		pos_hint: {'center_x': 0.5}	 		    	
+				text: 'ATRAS'
+				on_press:  root.current=('Categoria')
+		   #      Button:  		    	
+					# text: '*NEXT'#ESTARIA DE MAS 
+					# # on_press: root.current=('')
 	Screen:    	
 		name: "av"
 		BoxLayout:
@@ -155,45 +199,54 @@
 			font_size: "30dp"
         	Titulo:
             	text:('[b]AV[/b]')			
-			Button:				
+			Button:	
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85			
 				text: 'TV'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("TV","av")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'MINI'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("MINI","av")
-			Button:				
+			Button:	
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85			
 				text: 'MICRO'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("MICRO","av")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'DVD'	
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("DVD","av")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'HTS'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("HTS","av")
 			Button:
+				pos_hint: {'center_x': 0.5}						
+				size_hint_x: 0.85
 				text: 'BD'	
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("BD","av")		
-			GridLayout:
-				cols: 2
+			Button: 
 				spacing: "50dp"
-				Button:  		    	
-					text: 'ATRAS'
-					on_press:  root.current=('categoria')
-		        Button:  		    	
-					text: '*NEXT'#ESTARIA DE MAS 
-					# on_press: root.current=('')
+				size_hint_x: 0.5
+	    		pos_hint: {'center_x': 0.5}	 		    	
+				text: 'ATRAS'
+				on_press:  root.current=('Categoria')
 	Screen:    	
 		name: "consultando"
 		BoxLayout:
@@ -203,7 +256,8 @@
         	Titulo:
             	text:('[b]consulta: {0}[/b]'.format(root.var_consul))			
 			GridLayout:
-				cols: 4
+				pos_hint: {'center_x': 0.5}	
+				cols: 4				
 				spacing: "20dp"
 				Button:  		    	
 					text: '1'
@@ -218,16 +272,21 @@
 			GridLayout:
 				cols: 3
 				spacing: "40dp"
-				Button:  		    	
+				Button:  
+					size_hint_x: 0.25			    	
 					text: 'ATRAS' #funcione para que regrese a submenu
-					on_press:  
+					on_press: 
+						 
 						root.current=(''+root.name)						
 						root.limpiar()
-				Button:  		    	
+				Button:  
+					size_hint_x: 0.45	    	
 					text: 'NEW SKU'
 					on_press:  
+						root.limpiar()
 						root.current=('nuevo_art')
-		        Button:  		    	
+		        Button:  
+		        	size_hint_x: 0.30		    	
 					text: 'SAVE'
 					on_press:  
 						root.current=(''+root.name)
@@ -277,15 +336,18 @@
 				spacing: "50dp"
 				Button:  		    	
 					text: 'ATRAS' 
+					size_hint_x: 0.35
 					on_press:  
-						root.current=(''+root.name)
-				Button:  		    	
+						root.current=(''+root.name)					
+						root.limpiar()
+				Button: 
+					size_hint_x: 0.60 		    	
 					text: 'SAVE NEW SKU'
 					on_press:  
-						root.save_new_sku()
+						root.save_new_sku()						
+						root.limpiar()
 						root.current=("consultando")
-	Screen:
-		
+	Screen:		
 		name: 'guardar'
 		canvas.before:
 	        Color:
@@ -296,6 +358,7 @@
 	    BoxLayout:
 	    	#aqui ira un for de botones 
 	    	orientation: 'vertical'
+			spacing: "20dp"
 		    GridLayout:
 		    	cols: 2
 			    ListView:
@@ -304,13 +367,18 @@
 		    GridLayout:
 				cols: 2
 				spacing: "50dp"
-			    Button:  		    	
+			    Button: 
+			    	size_hint_x: 0.30	 		    	
 					text: 'Continuar \n Proyecto' 
-					#on_press:  root.current=('')
-				Button:  		    	
+					on_press:  root.current=('Categoria')
+				Button:  
+					size_hint_x: 0.60			    	
 					text: 'SEND PROYECTO'
 					on_press:  
-						root.current=('usu')
-			Button:  		    	
+						root.current=('Menu Principal')
+			Button:  
+				spacing: "50dp"	
+				size_hint_x: 0.5
+		    	pos_hint: {'center_x': 0.5}			    	
 				text: 'ATRAS' 
-				on_press:  root.current=('categoria')
+				on_press:  root.current=('Categoria')
