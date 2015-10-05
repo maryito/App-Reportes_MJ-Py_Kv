@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from kivy.app import App
-from  kivy.properties import ObjectProperty
+from  kivy.properties import ObjectProperty,StringProperty
 from kivy.uix.screenmanager import ScreenManager,Screen
 from kivy.uix.listview import ListView
 import time
@@ -12,18 +12,17 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from tool  import fechas
+from bd import DML
 import random
- 	
+import linecache
+
+from sqlalchemy import create_engine
 """
 	POr investigar
 	como usar los Popup para usarlo validar campos
 	como ponemos visualizar en formade tabla los datos a imprimir y consultar
 	buscar como hacer para enviar los datos  procesados
-""" 
-class Usuario(BoxLayout):
-	def __init__(self, arg):
-		super(Usuario, self).__init__(**kwargs)
-		
+"""
 class MaPopup(BoxLayout):
     cancel = ObjectProperty(None)
     # def __init__(self, **kwargs):
@@ -35,6 +34,7 @@ class MaPopup(BoxLayout):
     #     self.add_widget(list_view)
 
 class User(ScreenManager):
+	
 	nombre = ObjectProperty()
 	empresa = ObjectProperty()
 	calendario = fechas()
@@ -48,8 +48,7 @@ class User(ScreenManager):
 	med=	ObjectProperty()
 	marca=	ObjectProperty()
 	sku=	ObjectProperty()
-	resultado_lista= ObjectProperty()
-	
+
 	espera = []
 	add ={}
 	temp =[]
@@ -68,12 +67,19 @@ class User(ScreenManager):
 	def iniciar(self):
 		self.fecha= self.calendario[0]
 		self.hora= self.calendario[1]	
-		self.resultado_lista.item_strings = ["NO HAY DATOS PROCESADOS ACTUALMENTE"]	
-		print("Inicando...")	
+		self.resultado_lista.item_strings = ["NO 	HAY DATOS PROCESADOS ACTUALMENTE"]	
+		# print("Inicando...")	
 	def categoria(self,consulta, screen):
 		self.var_consul = consulta
 		self.name = screen
-		print("Consultando...")	
+		db = DML("maryon","faru9510","faru.no-ip.me","faru")
+		print("Consultando...",consulta, self.var_consul)	
+		m_consulta =db.Mostrar(consulta)
+		if not m_consulta: self.mostrar_con.item_strings=["Consulta No Disponible ACTUALMENTE..."]
+		elif len(m_consulta) <=1:
+			self.mostrar_con.item_strings=["No Hay Registro En la Base de Datos ...ADD..."]
+		else:
+			self.mostrar_con.item_strings = ["{0}  {1}  {2}  {3}  {4}  {5}".format(linecache.getline(str(registro[0]),50),str(registro[1]),str(registro[2]),str(registro[3]),str(registro[4]),str(registro[5])) for registro  in m_consulta]
 	def limpiar(self,):
 		self.div.text=self.cat.text=self.subcat.text=self.med.text=self.marca.text =self.sku.text=""
 		temp= espera = []
@@ -100,14 +106,12 @@ class User(ScreenManager):
 		else:
 			self.espera =[]			
 			for x in temp:
-		 		self.espera.append(x)	
-
-		 	self.sav = True		
+		 		self.espera.append(x)
+			self.sav = True		
 			print(self.espera)
 			print("save_new_sku-- Datos Correctos")
 	def save(self): #funcion nos servira para guardar la data ingresada
 		print(self.sav)
-
 		# #self.espera =[]
 		# temp =[(self.div.text).strip(),(self.cat.text).strip(),(self.subcat.text).strip(),(self.med.text).strip(),(self.marca.text ).strip(), (self.sku.text).strip()]
 		# for x in temp:
@@ -126,7 +130,7 @@ class User(ScreenManager):
 		else:	
 			id = random.getrandbits(10)
 			self.add[id]=self.espera
-			self.resultado_lista.item_strings = ["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()]
+			self.resultado_lista = ["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()]
 			print(self.add)
 			print("save_db--Actualizar base da datos")
 			self.sav = False

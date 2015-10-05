@@ -37,7 +37,8 @@
 	med: med 
 	marca: marca 
 	sku: sku
-	resultado_lista:lista
+	resultado_lista: resultado_lista
+	mostrar_con: mostrar_con
 	Screen:
 		name: "Inicio"
 		MaButton:
@@ -183,7 +184,7 @@
 				text: 'OVEN'
 				on_press: 
 					root.current=('consultando')	
-					root.categoria("AC","da")			
+					root.categoria("OVEN","da")			
 							
 			Button: 
 				spacing: "50dp"
@@ -270,8 +271,8 @@
 					text: '3'	
 				Button:  		    	
 					text: '4'
-			Label:
-				text: 'consultando'			
+			ListView:
+				id: mostrar_con			
 			GridLayout:
 				cols: 3
 				spacing: "40dp"
@@ -306,34 +307,45 @@
 			Label: 
 	        	text: "DIVISIÓN"
 	        TextInput:
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
 	        	id: div
 	        	multiline: False
 	        Label: 
 	        	text: "CATEGORIA"
 	        TextInput:
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
 	        	id: cat
 	        	multiline: False
 	        Label: 
 	        	text: "SUBCATEGORIA"
 	        TextInput:
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
 	        	id: subcat
 	        	multiline: False
 	        Label: 
 	        	text: "MEDIDA "
 	        TextInput:
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
 	        	id: med
 	        	multiline: False
 	        Label: 
 	        	text: "MARCA"
 	        TextInput:
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
 	        	id: marca
 	        	multiline: False
 	        Label: 
 	        	text: "SKU"
 	        TextInput:
+	        	size_hint_x: 0.75
+		    	pos_hint: {'center_x': 0.5}	
 	        	id: sku
 	        	multiline: False
-		        		
 			GridLayout:
 				cols: 2
 				spacing: "50dp"
@@ -365,7 +377,7 @@
 		    GridLayout:
 		    	cols: 2
 			    ListView:
-			    	id: lista
+			    	id:resultado_lista
 			        size_hint: .8,.8
 		    GridLayout:
 				cols: 2
