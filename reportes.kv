@@ -54,39 +54,84 @@
                 root.transition = FadeTransition()
     Screen:    	
 		name: "Menu Principal"
+		canvas:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+				source: "ok.jpg"
         BoxLayout:
             orientation: 'vertical'
             spacing: "10dp"
 			font_size: "30dp"
-			Button:
-				text: 'Continuar Proyecto'
-				on_press: root.current=('guardar')
-	        Titulo:
-            	text:('[b]NUEVO PROYECTO[/b]')
+			GridLayout:
+				cols:3
+				Label:
+				Button:
+					background_color: (0,2,100,150)
+					text: 'Continuar Proyecto'
+					on_press: root.current=('guardar')
+				Label:
+			GridLayout:
+				cols: 3
+				Label:
+	        	Titulo:
+            		text:('[b]NUEVO PROYECTO[/b]')
+            	Label:
+			    
 			Label:	        		 
 				text: ("Fecha: {0} \nHora: {1}".format(root.fecha, root.hora))
 			GridLayout:
-				cols: 2
+				cols: 6
 				rows: 2
-		        Label: 
-		        	text: "Nombre: "
+				Label:
+				Label:
+		        Label:
+		        	text: 'Nombre: '
+		        	canvas.before:
+		        		Rectangle:
+		        			pos:self.pos
+		        			source: "fondob.png"
+		        			size:self.size
 		        TextInput:
 		        	id: nombre
 		        	multiline: False
-		        Label: 
-		        	text: "Tienda: "
+		        Label:
+		        Label:
+		        Label:
+		        Label: 	
+		        Label:
+		        	text: 'Tienda: '
+		        	canvas.before:
+		        		Rectangle:
+		        			pos:self.pos
+		        			source: "fondob.png"
+		        			size:self.size
 		        TextInput:
 		        	id: empresa
-		        	multiline: False		    	    	
-		    Button:  
-		    	size_hint_x: 0.5
-		    	pos_hint: {'center_x': 0.5}	    	
-				text: 'Inicio'
-				on_press: 		           
-	                root.usuario() 
-	                root.current=('veri_usu')
-	                root.transition = FallOutTransition()
+		        	multiline: False
+		        Label:
+		        Label:
+		        Label:
+		        	
+		        	
+		    GridLayout:
+		    	cols: 3
+		    	Label:
+			    Button:  
+			    	background_color: (0.2, .4, 1, 3)
+			    	pos_hint: {'center_x': 0.5}	    	
+					text: 'Inicio'
+					on_press: 		           
+		                root.usuario() 
+		                root.current=('veri_usu')
+		                root.transition = FallOutTransition()
+				Label:
 	Screen:
+		canvas.before:
+			Rectangle:
+				pos:self.pos
+				size:self.size
+				source: "ok.jpg"
 		name: "veri_usu"
 		BoxLayout:
 			orientation: 'vertical'
@@ -96,34 +141,45 @@
 				id: estado
 				disabled: True   	
 				spacing: "50dp"		
-	        Button:  
+	        Button:
+	        	background_color: (.2, .4, 1, 3)  
 	        	size_hint_x: 0.75
 		    	pos_hint: {'center_x': 0.5}	
 	        	id:estado_ven		    
 				on_press: root.current=(''+estado_ven.text)
     Screen:    	
 		name: "Categoria"
+		canvas.before:
+			Rectangle:
+				pos:self.pos
+				size:self.size
+				source: "ok2.jpg"
 		BoxLayout:
 			orientation: 'vertical'
 			spacing: "70dp"
 			font_size: "30dp"
+			Label:
 			Button:
+				background_color: (0, 2, 4, 6)
 				spacing: "50dp"	
 				size_hint_x: 0.60
 	    		pos_hint: {'center_x': 0.5}	 				
 				text: 'DA'
 				on_press: 
 					root.current=('da')
-					root.transition = RiseInTransition() 
+					root.transition = RiseInTransition()
+			Label:
 			Button:
+				background_color: (0, 2, 4, 6)
 				size_hint_x: 0.60
 	    		pos_hint: {'center_x': 0.5}	 
 				text: 'AV'
 				on_press: 
 					root.current=('av')
 					root.transition = WipeTransition()
-			
-			Button: 
+			Label:
+			Button:
+				background_color: (.2, .4, 1, 3) 
 				size_hint_x: 0.75
 	    		pos_hint: {'center_x': 0.5}	 	
 				spacing: "50dp"			    	
@@ -135,14 +191,20 @@
 					# text: '*NEXT'#ESTARIA DE MAS 
 					# # on_press: root.current=('')
 	Screen:    	
-		name: "da"		
+		name: "da"
+		canvas.before:
+			Rectangle:
+				pos:self.pos
+				size:self.size
+				source: "ok3.jpg"		
         BoxLayout:
         	orientation: 'vertical'
             spacing: "20dp"
 			font_size: "30dp"
         	Titulo:
             	text:('[b]DA[/b]')			
-			Button:	
+			Button:
+				background_color: (.2, .4, .6, 10)	
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85			
 				text: 'AC'
@@ -150,13 +212,15 @@
 					root.current=('consultando')	
 					root.categoria("AC","da")
 			Button:
+				background_color: (.2, .4, 1, 3) 
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'WM'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("WM","da")
-			Button:		
+			Button:
+				background_color: (.2, .4, .6, 10)			
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85		
 				text: 'MWO'
@@ -164,6 +228,7 @@
 					root.current=('consultando')	
 					root.categoria("MWO","da")
 			Button:
+				background_color: (.2, .4, 1, 3) 
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'AV'
@@ -171,6 +236,7 @@
 					root.current=('consultando')	
 					root.categoria("AV","da")
 			Button:
+				background_color: (.2, .4, .6, 10)	
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'REF'
@@ -178,6 +244,7 @@
 					root.current=('consultando')	
 					root.categoria("REF","da")
 			Button:
+				background_color: (.2, .4, 1, 3) 
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'OVEN'
@@ -185,7 +252,8 @@
 					root.current=('consultando')	
 					root.categoria("AC","da")			
 							
-			Button: 
+			Button:
+				background_color: (.2, .4, 1, 3) 
 				spacing: "50dp"
 				size_hint_x: 0.5
 	    		pos_hint: {'center_x': 0.5}	 		    	
@@ -196,27 +264,35 @@
 					# # on_press: root.current=('')
 	Screen:    	
 		name: "av"
+		canvas.before:
+			Rectangle:
+				pos:self.pos
+				size:self.size
+				source: "ok4.jpg"	
 		BoxLayout:
         	orientation: 'vertical'
             spacing: "20dp"
 			font_size: "30dp"
         	Titulo:
             	text:('[b]AV[/b]')			
-			Button:	
-				pos_hint: {'center_x': 0.5}						
+			Button:
+				background_color: (.2, .4, 1, 3)
+				pos_hint: {'center_x': 0.5}	 					
 				size_hint_x: 0.85			
 				text: 'TV'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("TV","av")
 			Button:
+				background_color: (.2, .4, .6, 10)
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'MINI'
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("MINI","av")
-			Button:	
+			Button:
+				background_color: (.2, .4, 1, 3) 	
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85			
 				text: 'MICRO'
@@ -224,6 +300,7 @@
 					root.current=('consultando')	
 					root.categoria("MICRO","av")
 			Button:
+				background_color: (.2, .4, .6, 10)
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'DVD'	
@@ -231,6 +308,7 @@
 					root.current=('consultando')	
 					root.categoria("DVD","av")
 			Button:
+				background_color: (.2, .4, 1, 3) 
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'HTS'
@@ -238,13 +316,15 @@
 					root.current=('consultando')	
 					root.categoria("HTS","av")
 			Button:
+				background_color: (.2, .4, .6, 10)
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
 				text: 'BD'	
 				on_press: 
 					root.current=('consultando')	
 					root.categoria("BD","av")		
-			Button: 
+			Button:
+				background_color: (.2, .4, 1, 3)  
 				spacing: "50dp"
 				size_hint_x: 0.5
 	    		pos_hint: {'center_x': 0.5}	 		    	
@@ -252,6 +332,11 @@
 				on_press:  root.current=('Categoria')
 	Screen:    	
 		name: "consultando"
+		canvas.before:
+			Rectangle:
+				pos:self.pos
+				size:self.size
+				source: "ok5.jpg"
 		BoxLayout:
         	orientation: 'vertical'
             spacing: "20dp"
@@ -271,7 +356,12 @@
 				Button:  		    	
 					text: '4'
 			Label:
-				text: 'consultando'			
+				canvas.before:
+					Color:
+						rgb: (1, 1, 1)
+					Rectangle:
+						pos:self.pos
+						size:self.size		
 			GridLayout:
 				cols: 3
 				spacing: "40dp"
