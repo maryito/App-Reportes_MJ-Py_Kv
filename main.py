@@ -2,20 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from kivy.app import App
-from  kivy.properties import ObjectProperty,StringProperty
+from  kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager,Screen
-from kivy.uix.listview import ListView
 import time
 
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from kivy.core.window import Window
 from tool  import fechas
 from bd import DML
 import random
-import linecache
-
 from sqlalchemy import create_engine
 """
 	POr investigar
@@ -61,7 +56,7 @@ class User(ScreenManager):
 		# Instantiate MaPopup and give functionality to cancel butto
 		
 		#popup_content = MaPopup(cancel=self._dismiss_popup)
-		popup_content =  ListView(item_strings=["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()])
+		popupy6_content =  ListView(item_strings=["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()])
 		self._popup = Popup(title = 'Bievenidos', size_hint = (0.5, 0.5), content=popup_content)
 		self._popup.open()
 	def iniciar(self):
@@ -72,14 +67,14 @@ class User(ScreenManager):
 	def categoria(self,consulta, screen):
 		self.var_consul = consulta
 		self.name = screen
-		db = DML("maryon","faru9510","faru.no-ip.me","faru")
-		print("Consultando...",consulta, self.var_consul)	
+		db = DML("maryon","faru9510","faru.no-ip.org","faru")
+		print("Consultan		j do...",consulta, self.var_consul)	
 		m_consulta =db.Mostrar(consulta)
 		if not m_consulta: self.mostrar_con.item_strings=["Consulta No Disponible ACTUALMENTE..."]
 		elif len(m_consulta) <=1:
 			self.mostrar_con.item_strings=["No Hay Registro En la Base de Datos ...ADD..."]
 		else:
-			self.mostrar_con.item_strings = ["{0}  {1}  {2}  {3}  {4}  {5}".format(linecache.getline(str(registro[0]),50),str(registro[1]),str(registro[2]),str(registro[3]),str(registro[4]),str(registro[5])) for registro  in m_consulta]
+			self.mostrar_con.item_strings = ["{0}  {1}  {2}  {3}  {4}  {5}".format(str(registro[0]),str(registro[1]),str(registro[2]),str(registro[3]),str(registro[4]),str(registro[5])) for registro  in m_consulta]
 	def limpiar(self,):
 		self.div.text=self.cat.text=self.subcat.text=self.med.text=self.marca.text =self.sku.text=""
 		temp= espera = []
@@ -130,7 +125,7 @@ class User(ScreenManager):
 		else:	
 			id = random.getrandbits(10)
 			self.add[id]=self.espera
-			self.resultado_lista = ["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()]
+			self.resultado_lista.item_strings = ["{0}, {1}".format(clave,valor) for clave,valor in self.add.items()]
 			print(self.add)
 			print("save_db--Actualizar base da datos")
 			self.sav = False

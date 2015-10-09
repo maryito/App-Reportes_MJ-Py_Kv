@@ -167,13 +167,6 @@
 			Button:
 				pos_hint: {'center_x': 0.5}						
 				size_hint_x: 0.85
-				text: 'AV'
-				on_press: 
-					root.current=('consultando')	
-					root.categoria("AV","da")
-			Button:
-				pos_hint: {'center_x': 0.5}						
-				size_hint_x: 0.85
 				text: 'REF'
 				on_press: 
 					root.current=('consultando')	
@@ -264,13 +257,13 @@
 				cols: 4				
 				spacing: "20dp"
 				Button:  		    	
-					text: '1'
+					text: 'SKU/MOD'
 				Button:  		    	
-					text: '2'
+					text: 'VENTA'
 		        Button:  		    	
-					text: '3'	
+					text: 'EXHIBICION'	
 				Button:  		    	
-					text: '4'
+					text: 'PRECIO'
 			ListView:
 				id: mostrar_con			
 			GridLayout:

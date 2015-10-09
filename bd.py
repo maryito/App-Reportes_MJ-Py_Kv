@@ -1,13 +1,11 @@
 # -*- coding: utf-8 *-*
 from sqlalchemy import create_engine
-import mysql.connector
-
 from sqlalchemy  import exc
 # resul = engine.execute( "SELECT * FROM test").fetchone()
 
 class DML():
 	"""DML"""
-	def __init__(self,usuario='maryon',password='faru9510', host='localhost',nom_bd='faru'):
+	def __init__(self,usuario='maryon',password='faru9510', host='faru.noip.me',nom_bd='faru'):
 		'''inicializacion con parametros de configuracion BD'''
 		self.usuario = usuario
 		self.password= password 
